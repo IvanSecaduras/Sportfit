@@ -68,6 +68,39 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+# Paginator Configuration
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+# VichUploader Configuration
+vich_uploader:
+    db_driver: orm
+    twig: true
+    mappings:
+            usuario_image:
+                uri_prefix:         /images/perfil
+                upload_destination: '%kernel.root_dir%/../web/images/perfil'
+                namer:              vich_uploader.namer_uniqid
+                inject_on_load:     false
+                delete_on_update:   true
+                delete_on_remove:   true
+
+            background_image:
+              uri_prefix:         /images/background
+              upload_destination: '%kernel.root_dir%/../web/images/background'
+              namer:              vich_uploader.namer_uniqid
+              inject_on_load:     false
+              delete_on_update:   true
+              delete_on_remove:   true
+
 #FOSCommentBundle Configuration
 fos_comment:
     db_driver: orm
