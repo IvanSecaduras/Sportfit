@@ -1,28 +1,21 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="row">
-    <div class="portlet light bordered card-4">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-bar-chart font-dark hide"></i>
-                <span class="caption-subject font-dark bold uppercase"><i class="fa fa-user"></i> Nuevo Usuario</span>
-            </div>
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'm-login__form m-form'}}) }}
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_widget(form) }}
         </div>
-        <div class="portlet-body">
-            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_widget(form) }}
-                </div>
-            </div>
-            <div class="row" style="padding-top:20px;">
-                <div class="col-xs-12">
-                    <input type="submit" class="btn btn-info pull-right" value="{{ 'registration.submit'|trans }}" />
-                    <a id="cancelar" onclick="window.history.go(-1); return false;" class="btn btn-danger pull-right" style="margin:auto 20px;">Cancelar</a>
-                </div>
-            </div>
-            {{ form_end(form) }}
-        </div>
-        <!-- END PORTLET-->
     </div>
-</div>
+    <div class="row" style="padding-top:20px;">
+        <div class="col-xs-12">
+            <input type="submit" class="btn btn-info pull-right" value="{{ 'registration.submit'|trans }}" />
+            <a id="cancelar" onclick="window.history.go(-1); return false;" class="btn btn-danger pull-right" style="margin:auto 20px;">Cancelar</a>
+        </div>
+    </div>
+    <div class="m-login__form-action">
+        <button id="m_login_signup_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Aceptar</button>
+        <button id="m_login_signup_cancel" class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom">Cancelar</button>
+    </div>
+    {{ form_end(form) }}
+
+

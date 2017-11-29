@@ -77,8 +77,10 @@ fos_user:
         address: you@example.com
         sender_name: You
     registration:
+        confirmation:
+          enabled:    false # change to true for required email confirmation
         form:
-          name: app_user_registration
+          type: AppBundle\Form\Type\UsuarioType
 
 # Paginator Configuration
 knp_paginator:

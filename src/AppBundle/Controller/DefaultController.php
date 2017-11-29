@@ -18,9 +18,9 @@ class DefaultController extends Controller
             return new RedirectResponse($router->generate('panel-control'), 307);
         }elseif ($authChecker->isGranted('ROLE_ADMIN')) {
             return new RedirectResponse($router->generate('panel-control'), 307);
-        }elseif($authChecker->isGranted('ROLE_LOGISTICA')){
+        }elseif($authChecker->isGranted('ROLE_GERENTE')){
             return new RedirectResponse($router->generate('panel-control'), 307);
-        }elseif($authChecker->isGranted('ROLE_CHOFER')){
+        }elseif($authChecker->isGranted('ROLE_USER')){
             return new RedirectResponse($router->generate('panel-control'), 307);
         }
 

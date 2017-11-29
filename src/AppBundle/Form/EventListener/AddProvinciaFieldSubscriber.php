@@ -3,7 +3,6 @@
 namespace AppBundle\Form\EventListener;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -19,29 +18,13 @@ class AddProvinciaFieldSubscriber implements EventSubscriberInterface
         );
     }
 
-    private function addRolesField($form)
-    {
-        $form->add('roles', ChoiceType::class, array(
-            'choices'=> [
-                'Logística' => '1',
-                'Chofer' => '2'
-            ],
-            'placeholder' => 'Seleccione un cargo',
-            'label' => 'Cargo',
-            "required"=>true,
-            'attr' => array(
-                'class'=> 'form-control m-input',
-            ),
-            'mapped' => false,
-        ));
-    }
-
     private function addProvinciaField($form)
     {
         $form->add('provincia', EntityType::class, array(
             'attr' => array(
                 'class'=> 'form-control m-input',
             ),
+            "label"=>false,
             'class'         => 'AppBundle:Provincias',
             'mapped' => false,
             'query_builder' => function (EntityRepository $repository) {
@@ -58,6 +41,7 @@ class AddProvinciaFieldSubscriber implements EventSubscriberInterface
                 'attr' => array(
                     'class' => 'form-control m-input',
                 ),
+                "label"=>false,
                 'class'         => 'AppBundle:Municipios',
                 'mapped'        => true,
                 'query_builder' => function (EntityRepository $repository) use ($provincia) {
@@ -73,6 +57,7 @@ class AddProvinciaFieldSubscriber implements EventSubscriberInterface
                     'class' => 'form-control m-input',
                     'disabled' => 'disabled',
                 ),
+                "label"=>false,
                 'class'         => 'AppBundle:Municipios',
                 'mapped'        => true,
                 'query_builder' => function (EntityRepository $repository) use ($provincia) {
@@ -97,7 +82,6 @@ class AddProvinciaFieldSubscriber implements EventSubscriberInterface
 
         $provincia = array_key_exists('provincia', $data) ? $data['provincia'] : null;
 
-        $this->addRolesField($event->getForm());
         $this->addProvinciaField($event->getForm());
         $this->addPoblacionField($event->getForm(), $provincia);
     }
@@ -112,7 +96,6 @@ class AddProvinciaFieldSubscriber implements EventSubscriberInterface
 
         $provincia = ($data->getMunicipio() != null) ? $data->getMunicipio()->getProvincia() : null ;
 
-        $this->addRolesField($event->getForm());
         $this->addProvinciaField($event->getForm());
         $this->addPoblacionField($event->getForm(), $provincia);
     }

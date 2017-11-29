@@ -4,9 +4,12 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity
+ * @Vich\Uploadable
  * @ORM\Table(name="Usuario")
  */
 class Usuario extends BaseUser
@@ -19,72 +22,78 @@ class Usuario extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=true)
      * @var string
      */
     protected $nombre;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=true)
      * @var string
      */
     protected $apellidos;
 
     /**
-     * @ORM\Column(type="bigint", nullable=true)
-     * @var int
-     */
-    protected $telefono;
-
-    /**
-     * @ORM\Column(type="bigint", nullable=true)
-     * @var int
-     */
-    protected $telefono_urgencia;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=140, nullable=true)
      * @var string
      */
-    protected $nombre_contacto;
+    protected $biografia;
 
     /**
-     * @ORM\Column(type="bigint", nullable=true)
-     * @var integer
+     * @ORM\Column(type="string", length=120, nullable=true)
+     * @var string
      */
-    protected $codigo_postal;
+    protected $facebook;
+
+    /**
+     * @ORM\Column(type="string", length=120, nullable=true)
+     * @var string
+     */
+    protected $twitter;
+
+    /**
+     * @ORM\Column(type="string", length=120, nullable=true)
+     * @var string
+     */
+    protected $instagram;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * * @var \DateTime
+     */
+    protected $fecha_nacimiento;
+
+    /**
+     *
+     * @Vich\UploadableField(mapping="usuario_image", fileNameProperty="imageName")
+     * @var File
+     */
+    protected $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     * @var string
+     */
+    protected $imageName;
+
+    /**
+     * @Vich\UploadableField(mapping="background_image", fileNameProperty="backgroundImg")
+     * @var File
+     */
+    protected $background_name;
+
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     * @var string
+     */
+    protected $backgroundImg;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Municipios", inversedBy="usuario")
      * @ORM\JoinColumn(name="municipio", referencedColumnName="id", nullable=true)
      */
     protected $municipio;
-
-    /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Camion", inversedBy="usuario")
-     * @ORM\JoinColumn(name="camion", referencedColumnName="id", nullable=true)
-     */
-    protected $camion;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrdenTransporte", mappedBy="usuario")
-     */
-    protected $orden_transporte;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CartaPorte", mappedBy="usuario_crea")
-     */
-    protected $carta_porte_crea;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CartaPorte", mappedBy="usuario_recogida")
-     */
-    protected $carta_porte_recogida;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CartaPorte", mappedBy="usuario_entrega")
-     */
-    protected $carta_porte_entrega;
 
     /**
      * @return mixed
@@ -135,147 +144,147 @@ class Usuario extends BaseUser
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getCamion()
+    public function getBiografia()
     {
-        return $this->camion;
+        return $this->biografia;
     }
 
     /**
-     * @param mixed $camion
+     * @param string $biografia
      */
-    public function setCamion($camion)
+    public function setBiografia($biografia)
     {
-        $this->camion = $camion;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrdenTransporte()
-    {
-        return $this->orden_transporte;
-    }
-
-    /**
-     * @param mixed $orden_transporte
-     */
-    public function setOrdenTransporte($orden_transporte)
-    {
-        $this->orden_transporte = $orden_transporte;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCartaPorteCrea()
-    {
-        return $this->carta_porte_crea;
-    }
-
-    /**
-     * @param mixed $carta_porte_crea
-     */
-    public function setCartaPorteCrea($carta_porte_crea)
-    {
-        $this->carta_porte_crea = $carta_porte_crea;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCartaPorteRecogida()
-    {
-        return $this->carta_porte_recogida;
-    }
-
-    /**
-     * @param mixed $carta_porte_recogida
-     */
-    public function setCartaPorteRecogida($carta_porte_recogida)
-    {
-        $this->carta_porte_recogida = $carta_porte_recogida;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCartaPorteEntrega()
-    {
-        return $this->carta_porte_entrega;
-    }
-
-    /**
-     * @param mixed $carta_porte_entrega
-     */
-    public function setCartaPorteEntrega($carta_porte_entrega)
-    {
-        $this->carta_porte_entrega = $carta_porte_entrega;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTelefono()
-    {
-        return $this->telefono;
-    }
-
-    /**
-     * @param mixed $telefono
-     */
-    public function setTelefono($telefono)
-    {
-        $this->telefono = $telefono;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTelefonoUrgencia()
-    {
-        return $this->telefono_urgencia;
-    }
-
-    /**
-     * @param int $telefono_urgencia
-     */
-    public function setTelefonoUrgencia($telefono_urgencia)
-    {
-        $this->telefono_urgencia = $telefono_urgencia;
+        $this->biografia = $biografia;
     }
 
     /**
      * @return string
      */
-    public function getNombreContacto()
+    public function getFacebook()
     {
-        return $this->nombre_contacto;
+        return $this->facebook;
     }
 
     /**
-     * @param string $nombre_contacto
+     * @param string $facebook
      */
-    public function setNombreContacto($nombre_contacto)
+    public function setFacebook($facebook)
     {
-        $this->nombre_contacto = $nombre_contacto;
+        $this->facebook = $facebook;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getCodigoPostal()
+    public function getTwitter()
     {
-        return $this->codigo_postal;
+        return $this->twitter;
     }
 
     /**
-     * @param int $codigo_postal
+     * @param string $twitter
      */
-    public function setCodigoPostal($codigo_postal)
+    public function setTwitter($twitter)
     {
-        $this->codigo_postal = $codigo_postal;
+        $this->twitter = $twitter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInstagram()
+    {
+        return $this->instagram;
+    }
+
+    /**
+     * @param string $instagram
+     */
+    public function setInstagram($instagram)
+    {
+        $this->instagram = $instagram;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getFechaNacimiento()
+    {
+        return $this->fecha_nacimiento;
+    }
+
+    /**
+     * @param \DateTime $fecha_nacimiento
+     */
+    public function setFechaNacimiento($fecha_nacimiento)
+    {
+        $this->fecha_nacimiento = $fecha_nacimiento;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return File
+     */
+    public function getBackgroundName()
+    {
+        return $this->background_name;
+    }
+
+    /**
+     * @param File $background_name
+     */
+    public function setBackgroundName($background_name)
+    {
+        $this->background_name = $background_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackgroundImg()
+    {
+        return $this->backgroundImg;
+    }
+
+    /**
+     * @param string $backgroundImg
+     */
+    public function setBackgroundImg($backgroundImg)
+    {
+        $this->backgroundImg = $backgroundImg;
     }
 
     /**
