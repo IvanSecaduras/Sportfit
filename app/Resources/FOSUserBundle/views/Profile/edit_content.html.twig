@@ -1,0 +1,36 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption font-dark">
+                        <i class="icon-settings font-dark icon"></i>
+                        <span class="caption-subject bold uppercase">EDITAR USUARIO {{ app.user.username }}</span>
+                    </div>
+                    <div class="tools"></div>
+                </div>
+                <div class="portlet-body">
+                    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            {{ form_widget(form) }}
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <input type="submit" class="btn btn-info pull-right" value="{{ 'profile.edit.submit'| trans }}" />
+                            <a id="cancelar" onclick="window.history.go(-1); return false;" class="btn btn-danger pull-right" style="margin:auto 20px;">Cancelar</a>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

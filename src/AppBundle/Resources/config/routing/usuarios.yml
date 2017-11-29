@@ -1,0 +1,20 @@
+listar-usuarios:
+  path:     /usuarios
+  defaults: { _controller: AppBundle:Usuario:listar }
+
+nuevo-usuario:
+  path:     /usuario/nuevo
+  defaults: { _controller: AppBundle:Usuario:nuevo }
+
+editar-usuario:
+  path:     /usuario/editar/{id}
+  defaults: { _controller: AppBundle:Usuario:editar }
+
+eliminar-usuario:
+  path:     /usuario/eliminar/{id}
+  defaults: { _controller: AppBundle:Usuario:eliminar }
+
+obtener-usuarios:
+  path:     /get/usuarios
+  defaults: { _controller: AppBundle:Usuario:get }
+  condition: "request.isXmlHttpRequest()"

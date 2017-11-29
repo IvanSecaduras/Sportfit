@@ -1,0 +1,28 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="portlet light bordered card-4">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-bar-chart font-dark hide"></i>
+                <span class="caption-subject font-dark bold uppercase"><i class="fa fa-user"></i> Nuevo Usuario</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_widget(form) }}
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px;">
+                <div class="col-xs-12">
+                    <input type="submit" class="btn btn-info pull-right" value="{{ 'registration.submit'|trans }}" />
+                    <a id="cancelar" onclick="window.history.go(-1); return false;" class="btn btn-danger pull-right" style="margin:auto 20px;">Cancelar</a>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>

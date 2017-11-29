@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DLC | Usuarios{% endblock %}
+
+
+{% block contenido %}
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h2 class="m-portlet__head-text">
+                        {% if editar is defined %}
+                            EDITAR USUARIO
+                        {% else %}
+                            NUEVO USUARIO
+                        {% endif %}
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="m-portlet__body">
+            {{form_start(form, {'action':'', 'method':'POST'})}}
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.username) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.email) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.camion) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.roles) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group m-form__group">
+        					{{ form_row(form.nombre) }}
+        				</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group m-form__group">
+        					{{ form_row(form.apellidos) }}
+        				</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+        					{{ form_row(form.telefono) }}
+		        		</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+		        			{{ form_row(form.nombreContacto) }}
+				        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+				        	{{ form_row(form.telefonoUrgencia) }}
+				        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+        					{{ form_row(form.provincia) }}
+		        		</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+					        {{ form_row(form.municipio) }}
+				        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group m-form__group">
+					        {{ form_row(form.codigoPostal) }}
+				        </div>
+                    </div>
+                </div>
+
+            {% if form.plainPassword is defined %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group m-form__group">
+					        {{ form_row(form.plainPassword.first) }}
+				        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group m-form__group">
+					        {{ form_row(form.plainPassword.second) }}
+				        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+                <div class="row m--padding-top-10">
+                    <div class="col-md-12">
+                        <div class="m-form__actions">
+			                <button type="submit" class="btn btn-success">Guardar</button>
+                            <a href="{{ path('listar-usuarios') }}" class="btn btn-secondary">Volver</a>
+			            </div>
+                    </div>
+                </div>
+
+            {{form_end(form)}}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function() {
+            if($("#appbundle_usuario_camion option").length){
+                $("#appbundle_usuario_camion option:first-child").text('No quedan camiones disponibles.');
+            }
+        });
+
+        $("#appbundle_usuario_provincia").change(function(){
+			var data = {
+			 provincia_id: $(this).val()
+			};
+			var $poblacion_selector = $('#appbundle_usuario_municipio');
+
+			$.ajax({
+			 type: 'post',
+			 url: '{{ path("select_poblaciones") }}',
+			 data: data,
+			 error: function() {
+				 alert('Error cargando las poblaciones.');
+			 },
+			 beforeSend: function() {
+			 },
+			 success: function(data) {
+                 $poblacion_selector.removeAttr('disabled');
+                 $poblacion_selector.html('');
+                 $poblacion_selector.append('<option value="">Seleccione su municipio</option>');
+
+				 for (var i=0, total = data.length; i < total; i++) {
+                     $poblacion_selector.append('<option value="' + data[i].id + '">' + data[i].municipio + '</option>');
+				 }
+			 }
+			});
+
+		});
+
+    </script>
+{% endblock %}

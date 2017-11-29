@@ -1,0 +1,25 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block contenido %}
+
+    <div class="row">
+        <div class="portlet light bordered card-4">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase"><i class="fa fa-user"></i> Mi cuenta</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="fos_user_user_show">
+                    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+                    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+
+{% endblock %}
+
+

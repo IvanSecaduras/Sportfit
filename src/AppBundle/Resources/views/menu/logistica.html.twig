@@ -1,0 +1,76 @@
+<ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
+    <li class="m-menu__item {% if app.request.attributes.get('_route') == 'panel-control' %}m-menu__item--active{% endif %}"  aria-haspopup="true">
+        <a  href="{{ path('inicio') }}" class="m-menu__link ">
+            <span class="m-menu__item-here"></span>
+            <span class="m-menu__link-text">
+                Panel de Control
+            </span>
+        </a>
+    </li>
+    <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel {% if app.request.attributes.get('_route') == 'listar-estados-orden_transporte' or app.request.attributes.get('_route') == 'listar-orden_transporte' %}m-menu__item--active{% endif %}"  data-menu-submenu-toggle="click" aria-haspopup="true">
+        <a  href="#" class="m-menu__link m-menu__toggle">
+            <span class="m-menu__item-here"></span>
+            <span class="m-menu__link-text">
+                Órdenes Transporte
+            </span>
+            <i class="m-menu__hor-arrow la la-angle-down"></i>
+            <i class="m-menu__ver-arrow la la-angle-right"></i>
+        </a>
+        <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
+            <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+            <ul class="m-menu__subnav">
+                <li class="m-menu__item "  aria-haspopup="true">
+                    <a  href="orden-transporte.html" class="m-menu__link ">
+                        <i class="m-menu__link-icon flaticon-diagram"></i>
+                        <span class="m-menu__link-title">
+                            <span class="m-menu__link-wrap">
+                                <span class="m-menu__link-text">
+                                    Generar orden
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
+                    <a  href="{{ path('listar-orden_transporte') }}" class="m-menu__link ">
+                        <i class="m-menu__link-icon flaticon-clipboard"></i>
+                        <span class="m-menu__link-text">
+                            Ver órdenes
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel {% block active_carta_porte %}{% endblock %}"  data-menu-submenu-toggle="click" aria-haspopup="true">
+        <a  href="#" class="m-menu__link m-menu__toggle">
+            <span class="m-menu__item-here"></span>
+            <span class="m-menu__link-text">
+                Carta Porte
+            </span>
+            <i class="m-menu__hor-arrow la la-angle-down"></i>
+            <i class="m-menu__ver-arrow la la-angle-right"></i>
+        </a>
+        <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
+            <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+            <ul class="m-menu__subnav">
+                <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
+                    <a  href="asignar-portes.html" class="m-menu__link ">
+                        <i class="m-menu__link-icon flaticon-user-add"></i>
+                        <span class="m-menu__link-text">
+                            Asignar portes
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
+                    <a  href="listado-portes.html" class="m-menu__link ">
+                        <i class="m-menu__link-icon flaticon-clipboard"></i>
+                        <span class="m-menu__link-text">
+                            Ver portes
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>

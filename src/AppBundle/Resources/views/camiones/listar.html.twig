@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DLC | Camiones{% endblock %}
+
+
+{% block contenido %}
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h2 class="m-portlet__head-text">
+                        LISTADO CAMIONES
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="m-portlet__body">
+            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                <div class="row align-items-center">
+                    <div class="col-xl-8 order-2 order-xl-1">
+                        <div class="form-group m-form__group row align-items-center">
+                            <div class="col-md-4">
+                                <div class="m-input-icon m-input-icon--left">
+                                    <input class="form-control m-input m-input--solid" placeholder="Buscar..." id="generalSearch" type="text">
+                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+									<span><i class="la la-search"></i></span>
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                        <button type="button" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill" data-toggle="modal" data-target="#nuevo_camion">
+                            <span>
+                                <i class="la la-plus-circle"></i>
+                                <span>
+                                    Nuevo camión
+                                </span>
+                            </span>
+                        </button>
+                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                    </div>
+                </div>
+            </div>
+            <!--begin: Datatable -->
+            <div class="tabla_camion"></div>
+            <!--end: Datatable -->
+            <div class="modal fade" id="nuevo_camion" tabindex="-1" role="dialog" aria-labelledby="nuevo_camion" style="display: none;" aria-hidden="true">
+                {{ render(controller('AppBundle:Camiones:nuevo')) }}
+            </div>
+
+            <div class="modal fade" id="editar_camion" tabindex="-1" role="dialog" aria-labelledby="editar_camion" style="display: none;" aria-hidden="true">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('assets/vendors/base/js/camion-data.js') }}" type="text/javascript"></script>
+{% endblock %}

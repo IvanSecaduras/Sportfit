@@ -1,0 +1,16 @@
+inicio:
+  path:     /
+  defaults: { _controller: AppBundle:Default:index }
+
+panel-control:
+  path:     /inicio
+  defaults: { _controller: AppBundle:Default:panel }
+
+select_poblaciones:
+    path : /poblaciones/select
+    defaults: { _controller: AppBundle:Public:selectPoblaciones}
+    condition: "request.isXmlHttpRequest()"
+
+usuarios:
+    resource: "@AppBundle/Resources/config/routing/usuarios.yml"
+    prefix: /

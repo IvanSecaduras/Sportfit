@@ -1,0 +1,56 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                {% if editar is defined %}
+                    EDITAR ESTADO
+                {% else %}
+                    NUEVO ESTADO
+                {% endif %}
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        {% if error is defined %}
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="alert alert-danger" role="alert" style="width: 100%;">
+                        <strong>Error</strong> No puede crear más estados.
+                    </div>
+                </div>
+
+            </div>
+        {% else %}
+            {% if editar is defined %}
+                {{ form_start(form, {'action': path('editar-estado-carta_porte', {'id': id}), 'method':'POST'}) }}
+            {% else %}
+                {{ form_start(form, {'action': path('nuevo-estado-carta_porte'), 'method':'POST'}) }}
+            {% endif %}
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.nombre) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.posicion) }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
+            </div>
+            {{ form_end(form) }}
+        {% endif %}
+    </div>
+</div>
