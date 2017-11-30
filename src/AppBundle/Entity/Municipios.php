@@ -38,6 +38,11 @@ class Municipios
     protected $usuario;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Evento", mappedBy="municipio")
+     */
+    protected $evento;
+
+    /**
      * @return int
      */
     public function getId()
@@ -101,6 +106,22 @@ class Municipios
     public function setUsuario($usuario)
     {
         $this->usuario = $usuario;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvento()
+    {
+        return $this->evento;
+    }
+
+    /**
+     * @param mixed $evento
+     */
+    public function setEvento($evento)
+    {
+        $this->evento = $evento;
     }
 
     public function __toString(){

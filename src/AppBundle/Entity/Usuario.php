@@ -96,6 +96,38 @@ class Usuario extends BaseUser
     protected $municipio;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Aviso", mappedBy="usuario_crea", cascade={"persist", "remove"})
+     */
+    protected $aviso_crea;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Aviso", mappedBy="usuario_recibe")
+     */
+    protected $aviso_recibe;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Evento", mappedBy="usuario", cascade={"persist", "remove"})
+     */
+    protected $evento;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Amistad", mappedBy="usuario_crea")
+     */
+    protected $amistad_crea;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Amistad", mappedBy="usuario_recibe")
+     */
+    protected $amistad_recibe;
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+        $this->roles = array('ROLE_USER');
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -301,6 +333,102 @@ class Usuario extends BaseUser
     public function setMunicipio($municipio)
     {
         $this->municipio = $municipio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvento()
+    {
+        return $this->evento;
+    }
+
+    /**
+     * @param mixed $evento
+     */
+    public function setEvento($evento)
+    {
+        $this->evento = $evento;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvisoCrea()
+    {
+        return $this->aviso_crea;
+    }
+
+    /**
+     * @param mixed $aviso_crea
+     */
+    public function setAvisoCrea($aviso_crea)
+    {
+        $this->aviso_crea = $aviso_crea;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvisoRecibe()
+    {
+        return $this->aviso_recibe;
+    }
+
+    /**
+     * @param mixed $aviso_recibe
+     */
+    public function setAvisoRecibe($aviso_recibe)
+    {
+        $this->aviso_recibe = $aviso_recibe;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSolicitudCrea()
+    {
+        return $this->solicitud_crea;
+    }
+
+    /**
+     * @param mixed $solicitud_crea
+     */
+    public function setSolicitudCrea($solicitud_crea)
+    {
+        $this->solicitud_crea = $solicitud_crea;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAmistadCrea()
+    {
+        return $this->amistad_crea;
+    }
+
+    /**
+     * @param mixed $amistad_crea
+     */
+    public function setAmistadCrea($amistad_crea)
+    {
+        $this->amistad_crea = $amistad_crea;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAmistadRecibe()
+    {
+        return $this->amistad_recibe;
+    }
+
+    /**
+     * @param mixed $amistad_recibe
+     */
+    public function setAmistadRecibe($amistad_recibe)
+    {
+        $this->amistad_recibe = $amistad_recibe;
     }
 
 }
